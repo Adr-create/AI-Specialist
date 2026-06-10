@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ильдар | AI Specialist Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- ПЕРЕМЕННЫЕ И ОБЩИЕ СТИЛИ --- */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --neon-glow: 0 0 15px rgba(168, 85, 247, 0.5);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            position: relative;
+            background: linear-gradient(45deg, var(--text-main), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- ШАПКА И НАВИГАЦИЯ --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-cyan);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 8px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Бургер-меню */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .hamburger class {
+            display: block;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+            background: radial-gradient(circle at center, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #fff, var(--accent-purple), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            min-height: 60px;
+        }
+
+        .typed-cursor {
+            color: var(--accent-cyan);
+            animation: blink 0.7s infinite;
+            font-weight: bold;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+            color: var(--text-main);
+            box-shadow: var(--neon-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.8);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 2px solid var(--accent-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(6, 182, 212, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+        }
+
+        /* --- РАЗДЕЛ ПРОЕКТЫ --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Видеоконтейнер */
+        .project-video-wrapper {
+            width: 100%;
+            height: 180px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            background-color: #0b111e;
+        }
+
+        .project-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(168, 85, 247, 0.05));
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+            pointer-events: none; /* Чтобы не мешать кликам по видео */
+        }
+
+        .project-card:hover .video-placeholder {
+            color: var(--accent-cyan);
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1));
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--accent-cyan);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        .btn-card {
+            align-self: flex-start;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent-purple);
+            background: transparent;
+            color: var(--text-main);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .btn-card:hover {
+            background: var(--accent-purple);
+            box-shadow: var(--neon-glow);
+        }
+
+        /* --- РАЗДЕЛ НАВЫКИ --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-badge {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-badge::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 50px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.05);
+            border-color: transparent;
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+
+        .skill-badge:hover::after {
+            opacity: 1;
+        }
+
+        /* --- ПОДВАЛ (FOOTER) --- */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                transition: var(--transition);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-link {
+                font-size: 1.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">ILDAR<span>.AI</span></a>
+            <button class="hamburger" id="hamburger-btn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#" class="nav-link">Главная</a></li>
+                <li><a href="#projects" class="nav-link">Проекты</a></li>
+                <li><a href="#skills" class="nav-link">Навыки</a></li>
+                <li><a href="#contact" class="nav-link">Контакты</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Ильдар | AI Specialist</h1>
+            <p class="hero-subtitle" id="typing-text"></p>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">Мои ИИ-проекты</a>
+                <a href="#contact" class="btn btn-secondary">Связаться</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">AI Projects</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <div>
+                        <div class="project-video-wrapper">
+                            <video autoplay loop muted playsinline class="project-video">
+                                <source src="путь_к_видео_1.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-placeholder">
+                                <span><i class="fa-solid fa-play"></i> AI Chatbot Demo</span>
+                            </div>
+                        </div>
+
+                        <h3 class="project-title">AI Chatbot Assistant</h3>
+                        <p class="project-desc">Интеграция умного ИИ-помощника на сайт через API. Бот умеет поддерживать контекст беседы и помогать пользователям с навигацией.</p>
+                        <div class="project-tags">
+                            <span class="tag">OpenAI API</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Prompt Engineering</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-card">Смотреть код</a>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-video-wrapper">
+                            <video autoplay loop muted playsinline class="project-video">
+                                <source src="путь_к_видео_2.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-placeholder">
+                                <span><i class="fa-solid fa-image"></i> Generation Process</span>
+                            </div>
+                        </div>
+
+                        <h3 class="project-title">Neural Image Generator</h3>
+                        <p class="project-desc">Интерфейс для генерации картинок по текстовому запросу с использованием современных нейросетей и удобной кастомизацией стилей.</p>
+                        <div class="project-tags">
+                            <span class="tag">AI API</span>
+                            <span class="tag">UI/UX</span>
+                            <span class="tag">CSS Grid</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-card">Смотреть код</a>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <div class="project-video-wrapper">
+                            <video autoplay loop muted playsinline class="project-video">
+                                <source src="путь_к_видео_3.mp4" type="video/mp4">
+                            </video>
+                            <div class="video-placeholder">
+                                <span><i class="fa-solid fa-chart-simple"></i> NLP Text Analysis</span>
+                            </div>
+                        </div>
+
+                        <h3 class="project-title">AI Text Analyzer</h3>
+                        <p class="project-desc">Скрипт на JavaScript для анализа текста, автоматического тегирования ключевых слов и точного распознавания эмоций автора.</p>
+                        <div class="project-tags">
+                            <span class="tag">Vanilla JS</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">Web App</span>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-card">Смотреть код</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">AI Skills</h2>
+            <div class="skills-container">
+                <div class="skill-badge">💡 Prompt Engineering</div>
+                <div class="skill-badge">🤖 GPT & LLM Integration</div>
+                <div class="skill-badge">⚡ JavaScript</div>
+                <div class="skill-badge">🌐 REST API</div>
+                <div class="skill-badge">🎨 HTML5 / CSS3 (Адаптив)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background: rgba(0,0,0,0.2);">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">Связаться со мной</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">Готов к новым интересным проектам и интеграциям искусственного интеллекта!</p>
+            <a href="mailto:ildar@example.com" class="btn btn-primary">Написать на почту</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ильдар. Ученик 8 школы. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- 1. БУРГЕР МЕНЮ ---
+        const hamburger = document.getElementById('hamburger-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // --- 2. ЭФФЕКТ ПЕЧАТАЮЩЕЙСЯ СТРОКИ ---
+        const fullText = "Ученик 8 школы. Разрабатываю интеллектуальные системы, создаю продвинутые промпты и интегрирую нейросети в веб-интерфейсы с помощью JavaScript.";
+        const typingContainer = document.getElementById('typing-text');
+        let index = 0;
+        const speed = 40; 
+
+        function typeWriter() {
+            if (index < fullText.length) {
+                typingContainer.innerHTML = fullText.substring(0, index + 1) + '<span class="typed-cursor">|</span>';
+                index++;
+                setTimeout(typeWriter, speed);
+            } else {
+                typingContainer.innerHTML = fullText + '<span class="typed-cursor">|</span>';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', typeWriter);
+
+        // --- 3. ПЛАВНЫЙ СКРОЛЛ ДЛЯ КНОПОК HERO ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
